@@ -1,0 +1,1 @@
+char* getMinus(char* a, char* b);
