@@ -1,21 +1,21 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "operator.h" // ÇÊ¿äÇÑ Çì´õ ÆÄÀÏ Æ÷ÇÔ
+#include "operator.h" // ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 #define MAX_LENGTH 32
 
-int inputProc(char* first, char* second, char* operator) // ¼º°ø : 0 return, ½ÇÆÐ : 1 return
+int inputProc(char* first, char* second, char* operator) // ï¿½ï¿½ï¿½ï¿½ : 0 return, ï¿½ï¿½ï¿½ï¿½ : 1 return
 {
-	char firstNumberSign; // Ã¹¹øÂ° ÀÔ·ÂÀÇ ºÎÈ£
-	char firstSizeIncludeNul; // Ã¹¹øÂ° ÀÔ·ÂÀÇ Å©±â (ºÎÈ£, null Æ÷ÇÔ)
-	char secondNumberSign; // µÎ¹øÂ° ÀÔ·ÂÀÇ ºÎÈ£
-	char secondSizeIncludeNul;  // µÎ¹øÂ° ÀÔ·ÂÀÇ Å©±â (ºÎÈ£, null Æ÷ÇÔ)
+	char firstNumberSign; // Ã¹ï¿½ï¿½Â° ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½ï¿½È£
+	char firstSizeIncludeNul; // Ã¹ï¿½ï¿½Â° ï¿½Ô·ï¿½ï¿½ï¿½ Å©ï¿½ï¿½ (ï¿½ï¿½È£, null ï¿½ï¿½ï¿½ï¿½)
+	char secondNumberSign; // ï¿½Î¹ï¿½Â° ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½ï¿½È£
+	char secondSizeIncludeNul;  // ï¿½Î¹ï¿½Â° ï¿½Ô·ï¿½ï¿½ï¿½ Å©ï¿½ï¿½ (ï¿½ï¿½È£, null ï¿½ï¿½ï¿½ï¿½)
 	char currentIndex = 0;
 	char currentData;
-	char offset; // ÀÔ·ÂÀÇ Å©±â Â÷ÀÌ
+	char offset; // ï¿½Ô·ï¿½ï¿½ï¿½ Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-	printf("Ã¹¹øÂ° ¼ýÀÚ : ");
+	printf("Ã¹ï¿½ï¿½Â° ï¿½ï¿½ï¿½ï¿½ : ");
 	firstNumberSign = getchar();
 	if (firstNumberSign >= '0' && firstNumberSign <= '9')
 	{
@@ -30,8 +30,8 @@ int inputProc(char* first, char* second, char* operator) // ¼º°ø : 0 return, ½ÇÆ
 	}
 	else
 	{
-		printf("Àß¸øµÈ ÀÔ·Â°ª");
-		while (getchar() != '\n') // ÀÔ·Â ¹öÆÛ ºñ¿ì±â
+		printf("ï¿½ß¸ï¿½ï¿½ï¿½ ï¿½Ô·Â°ï¿½");
+		while (getchar() != '\n') // ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		{
 			continue;
 		}
@@ -46,8 +46,8 @@ int inputProc(char* first, char* second, char* operator) // ¼º°ø : 0 return, ½ÇÆ
 		}
 		else
 		{
-			printf("Àß¸øµÈ ÀÔ·Â°ª");
-			while (getchar() != '\n') // ÀÔ·Â ¹öÆÛ ºñ¿ì±â 
+			printf("ï¿½ß¸ï¿½ï¿½ï¿½ ï¿½Ô·Â°ï¿½");
+			while (getchar() != '\n') // ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 			{
 				continue;
 			}
@@ -59,27 +59,27 @@ int inputProc(char* first, char* second, char* operator) // ¼º°ø : 0 return, ½ÇÆ
 	firstSizeIncludeNul = currentIndex;
 	currentIndex = 0;
 
-	printf("¿¬»êÀÚ (+, -, *, /) : ");
+	printf("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (+, -, *, /) : ");
 	currentData = getchar();
 	if ((currentData == '+') || (currentData == '-') || (currentData == '*') || (currentData == '/'))
 	{
 		*operator=currentData;
-		while (getchar() != '\n') // ÀÔ·Â ¹öÆÛ ºñ¿ì±â
+		while (getchar() != '\n') // ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		{
 			continue;
 		}
 	}
 	else
 	{
-		printf("Àß¸øµÈ ÀÔ·Â°ª");
-		while (getchar() != '\n') // ÀÔ·Â ¹öÆÛ ºñ¿ì±â 
+		printf("ï¿½ß¸ï¿½ï¿½ï¿½ ï¿½Ô·Â°ï¿½");
+		while (getchar() != '\n') // ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 		{
 			continue;
 		}
 		return 1;
 	}
 
-	printf("µÎ¹øÂ° ¼ýÀÚ : ");
+	printf("ï¿½Î¹ï¿½Â° ï¿½ï¿½ï¿½ï¿½ : ");
 	secondNumberSign = getchar();
 	if (secondNumberSign >= '0' && secondNumberSign <= '9')
 	{
@@ -94,8 +94,8 @@ int inputProc(char* first, char* second, char* operator) // ¼º°ø : 0 return, ½ÇÆ
 	}
 	else
 	{
-		printf("Àß¸øµÈ ÀÔ·Â°ª");
-		while (getchar() != '\n') // ÀÔ·Â ¹öÆÛ ºñ¿ì±â
+		printf("ï¿½ß¸ï¿½ï¿½ï¿½ ï¿½Ô·Â°ï¿½");
+		while (getchar() != '\n') // ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		{
 			continue;
 		}
@@ -110,8 +110,8 @@ int inputProc(char* first, char* second, char* operator) // ¼º°ø : 0 return, ½ÇÆ
 		}
 		else
 		{
-			printf("Àß¸øµÈ ÀÔ·Â°ª");
-			while (getchar() != '\n') // ÀÔ·Â ¹öÆÛ ºñ¿ì±â 
+			printf("ï¿½ß¸ï¿½ï¿½ï¿½ ï¿½Ô·Â°ï¿½");
+			while (getchar() != '\n') // ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 			{
 				continue;
 			}
@@ -122,7 +122,7 @@ int inputProc(char* first, char* second, char* operator) // ¼º°ø : 0 return, ½ÇÆ
 	second[currentIndex] = '\0';
 	secondSizeIncludeNul = currentIndex;
 	currentIndex = 0;
-	////////////////////////////////////////////////////////////////////////////////////////////////// ÀÚ¸®¼ö ¸ÂÃß±â
+	////////////////////////////////////////////////////////////////////////////////////////////////// ï¿½Ú¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß±ï¿½
 	if (firstSizeIncludeNul > secondSizeIncludeNul)
 	{
 		offset = firstSizeIncludeNul - secondSizeIncludeNul;
@@ -152,21 +152,21 @@ int inputProc(char* first, char* second, char* operator) // ¼º°ø : 0 return, ½ÇÆ
 }
 
 
-// ¸Þ´º Ãâ·Â ÇÔ¼ö
+// ï¿½Þ´ï¿½ ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
 int print_menu(void) {
     int nInput = 0;
     system("cls");
-    printf("[1] µ¡¼À \t[2] »¬¼À \t[0] Exit\n");
+    printf("[1] ï¿½ï¿½ï¿½ï¿½ \t[2] ï¿½ï¿½ï¿½ï¿½ \t[0] Exit\n");
 
     while (1) {
         int result = scanf_s("%d", &nInput);
         if (result != 1) {
-            printf("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù. ¼ýÀÚ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.\n");
+            printf("ï¿½ß¸ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ô´Ï´ï¿½. ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.\n");
             while (getchar() != '\n');
         }
         else {
             if (nInput < 0 || nInput > 2) {
-                printf("Àß¸ø ÀÔ·ÂÇÏ¼Ì½À´Ï´Ù. 0~2 »çÀÌ Á¤¼ö·Î ´Ù½Ã ¼±ÅÃÇØÁÖ¼¼¿ä.\n");
+                printf("ï¿½ß¸ï¿½ ï¿½Ô·ï¿½ï¿½Ï¼Ì½ï¿½ï¿½Ï´ï¿½. 0~2 ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.\n");
                 while (getchar() != '\n');
             }
             else {
@@ -178,7 +178,7 @@ int print_menu(void) {
     return nInput;
 }
 
-// ÀÔ·Â °ª ¹Þ±â ÇÔ¼ö
+// ï¿½Ô·ï¿½ ï¿½ï¿½ ï¿½Þ±ï¿½ ï¿½Ô¼ï¿½
 //char* getInput(const char* prompt) {
 //
 //}
@@ -210,12 +210,15 @@ int main() {
 
         switch (operator) {
         case 1:
-            // µ¡¼À Ã³¸® ÄÚµå (ÃßÈÄ Ãß°¡)
+            // ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ ï¿½Úµï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½)
+            res = add(firstNumber, secondNumber);
+            printf("ê²°ê³¼: %s\n", res);
+            free(res);
             break;
 
         case 2:
             res = getMinus(firstNumber, secondNumber);
-            printf("°á°ú: %s\n", res);
+            printf("ï¿½ï¿½ï¿½: %s\n", res);
             free(res);
             break;
         }
@@ -223,11 +226,11 @@ int main() {
         free(firstNumber);
         free(secondNumber);
 
-        puts("¸Þ´º·Î µ¹¾Æ°¡±â À§ÇØ¼­ Enter¸¦ ´­·¯ÁÖ¼¼¿ä.");
+        puts("ï¿½Þ´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ Enterï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.");
         getchar();
         getchar();
     }
 
-    puts("°è»ê±â¸¦ Á¾·áÇÏ°Ú½À´Ï´Ù.");
+    puts("ï¿½ï¿½ï¿½â¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°Ú½ï¿½ï¿½Ï´ï¿½.");
     return 0;
 }
