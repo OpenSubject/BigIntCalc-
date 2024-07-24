@@ -1,218 +1,220 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "operator.h" // í•„ìš”í•œ í—¤ë” íŒŒì¼ í¬í•¨
+#include "operator.h" // ÇÊ¿äÇÑ Çì´õ ÆÄÀÏ Æ÷ÇÔ
 
 #define MAX_LENGTH 32
 
-int inputProc(char* first, char* second, char* operator) // ì„±ê³µ : 0 return, ì‹¤íŒ¨ : 1 return
+int inputProc(char* first, char* second, char* operator) // ¼º°ø : 0 return, ½ÇÆÐ : 1 return
 {
-	char firstNumberSign; // ì²«ë²ˆì§¸ ìž…ë ¥ì˜ ë¶€í˜¸
-	char firstSizeIncludeNul; // ì²«ë²ˆì§¸ ìž…ë ¥ì˜ í¬ê¸° (ë¶€í˜¸, null í¬í•¨)
-	char secondNumberSign; // ë‘ë²ˆì§¸ ìž…ë ¥ì˜ ë¶€í˜¸
-	char secondSizeIncludeNul;  // ë‘ë²ˆì§¸ ìž…ë ¥ì˜ í¬ê¸° (ë¶€í˜¸, null í¬í•¨)
-	char currentIndex = 0;
-	char currentData;
-	char offset; // ìž…ë ¥ì˜ í¬ê¸° ì°¨ì´
+    char firstNumberSign; // Ã¹¹øÂ° ÀÔ·ÂÀÇ ºÎÈ£
+    char firstSizeIncludeNul; // Ã¹¹øÂ° ÀÔ·ÂÀÇ Å©±â (ºÎÈ£, null Æ÷ÇÔ)
+    char secondNumberSign; // µÎ¹øÂ° ÀÔ·ÂÀÇ ºÎÈ£
+    char secondSizeIncludeNul;  // µÎ¹øÂ° ÀÔ·ÂÀÇ Å©±â (ºÎÈ£, null Æ÷ÇÔ)
+    char currentIndex = 0;
+    char currentData;
+    char offset; // ÀÔ·ÂÀÇ Å©±â Â÷ÀÌ
 
-	printf("ì²«ë²ˆì§¸ ìˆ«ìž : ");
-	firstNumberSign = getchar();
-	if (firstNumberSign >= '0' && firstNumberSign <= '9')
-	{
-		first[currentIndex++] = 0;
-		first[currentIndex++] = firstNumberSign - '0';
-		firstNumberSign = 0;
-	}
-	else if (firstNumberSign == '-')
-	{
-		first[currentIndex++] = '-';
-		firstNumberSign = 1;
-	}
-	else
-	{
-		printf("ìž˜ëª»ëœ ìž…ë ¥ê°’");
-		while (getchar() != '\n') // ìž…ë ¥ ë²„í¼ ë¹„ìš°ê¸°
-		{
-			continue;
-		}
-		return 1;
-	}
+    printf("Ã¹¹øÂ° ¼ýÀÚ : ");
+    firstNumberSign = getchar();
+    if (firstNumberSign >= '0' && firstNumberSign <= '9')
+    {
+        first[currentIndex++] = '+';
+        first[currentIndex++] = firstNumberSign;
+        firstNumberSign = 0;
+    }
+    else if (firstNumberSign == '-')
+    {
+        first[currentIndex++] = '-';
+        firstNumberSign = 1;
+    }
+    else
+    {
+        printf("Àß¸øµÈ ÀÔ·Â°ª\n");
+        while (getchar() != '\n') // ÀÔ·Â ¹öÆÛ ºñ¿ì±â
+        {
+            continue;
+        }
+        return 1;
+    }
 
-	while ((currentData = getchar()) != '\n')
-	{
-		if (currentData >= '0' && currentData <= '9')
-		{
-			first[currentIndex++] = currentData - '0';
-		}
-		else
-		{
-			printf("ìž˜ëª»ëœ ìž…ë ¥ê°’");
-			while (getchar() != '\n') // ìž…ë ¥ ë²„í¼ ë¹„ìš°ê¸° 
-			{
-				continue;
-			}
-			return 1;
-		}
+    while ((currentData = getchar()) != '\n')
+    {
+        if (currentData >= '0' && currentData <= '9')
+        {
+            first[currentIndex++] = currentData;
+        }
+        else
+        {
+            printf("Àß¸øµÈ ÀÔ·Â°ª\n");
+            while (getchar() != '\n') // ÀÔ·Â ¹öÆÛ ºñ¿ì±â 
+            {
+                continue;
+            }
+            return 1;
+        }
 
-	}
-	first[currentIndex] = '\0';
-	firstSizeIncludeNul = currentIndex;
-	currentIndex = 0;
+    }
+    first[currentIndex] = '\0';
+    firstSizeIncludeNul = currentIndex;
+    currentIndex = 0;
 
-	printf("ì—°ì‚°ìž (+, -) or 0(EXIT): ");
-	currentData = getchar();
-	if ((currentData == '+') || (currentData == '-') || (currentData == '0'))
-	{
-		*operator=currentData;
-		while (getchar() != '\n') // ìž…ë ¥ ë²„í¼ ë¹„ìš°ê¸°
-		{
-			continue;
-		}
-	}
-	else
-	{
-		printf("ìž˜ëª»ëœ ìž…ë ¥ê°’");
-		while (getchar() != '\n') // ìž…ë ¥ ë²„í¼ ë¹„ìš°ê¸° 
-		{
-			continue;
-		}
-		return 1;
-	}
+    printf("¿¬»êÀÚ (+, -) or 0(EXIT): ");
+    currentData = getchar();
+    if ((currentData == '+') || (currentData == '-') || (currentData == '0'))
+    {
+        *operator = currentData;
+        while (getchar() != '\n') // ÀÔ·Â ¹öÆÛ ºñ¿ì±â
+        {
+            continue;
+        }
+    }
+    else
+    {
+        printf("Àß¸øµÈ ÀÔ·Â°ª\n");
+        while (getchar() != '\n') // ÀÔ·Â ¹öÆÛ ºñ¿ì±â 
+        {
+            continue;
+        }
+        return 1;
+    }
 
-	printf("ë‘ë²ˆì§¸ ìˆ«ìž : ");
-	secondNumberSign = getchar();
-	if (secondNumberSign >= '0' && secondNumberSign <= '9')
-	{
-		second[currentIndex++] = '+';
-		second[currentIndex++] = secondNumberSign - '0';
-		secondNumberSign = 0;
-	}
-	else if (secondNumberSign == '-')
-	{
-		second[currentIndex++] = '-';
-		secondNumberSign = 1;
-	}
-	else
-	{
-		printf("ìž˜ëª»ëœ ìž…ë ¥ê°’");
-		while (getchar() != '\n') // ìž…ë ¥ ë²„í¼ ë¹„ìš°ê¸°
-		{
-			continue;
-		}
-		return 1;
-	}
+    printf("µÎ¹øÂ° ¼ýÀÚ : ");
+    secondNumberSign = getchar();
+    if (secondNumberSign >= '0' && secondNumberSign <= '9')
+    {
+        second[currentIndex++] = '+';
+        second[currentIndex++] = secondNumberSign;
+        secondNumberSign = 0;
+    }
+    else if (secondNumberSign == '-')
+    {
+        second[currentIndex++] = '-';
+        secondNumberSign = 1;
+    }
+    else
+    {
+        printf("Àß¸øµÈ ÀÔ·Â°ª\n");
+        while (getchar() != '\n') // ÀÔ·Â ¹öÆÛ ºñ¿ì±â
+        {
+            continue;
+        }
+        return 1;
+    }
 
-	while ((currentData = getchar()) != '\n')
-	{
-		if (currentData >= '0' && currentData <= '9')
-		{
-			second[currentIndex++] = currentData - '0';
-		}
-		else
-		{
-			printf("ìž˜ëª»ëœ ìž…ë ¥ê°’");
-			while (getchar() != '\n') // ìž…ë ¥ ë²„í¼ ë¹„ìš°ê¸° 
-			{
-				continue;
-			}
-			return 1;
-		}
+    while ((currentData = getchar()) != '\n')
+    {
+        if (currentData >= '0' && currentData <= '9')
+        {
+            second[currentIndex++] = currentData;
+        }
+        else
+        {
+            printf("Àß¸øµÈ ÀÔ·Â°ª\n");
+            while (getchar() != '\n') // ÀÔ·Â ¹öÆÛ ºñ¿ì±â 
+            {
+                continue;
+            }
+            return 1;
+        }
 
-	}
-	second[currentIndex] = '\0';
-	secondSizeIncludeNul = currentIndex;
-	currentIndex = 0;
-	////////////////////////////////////////////////////////////////////////////////////////////////// ìžë¦¬ìˆ˜ ë§žì¶”ê¸°
-	if (firstSizeIncludeNul > secondSizeIncludeNul)
-	{
-		offset = firstSizeIncludeNul - secondSizeIncludeNul;
-		for (int count = 0; count < secondSizeIncludeNul; count++)
-		{
-			second[secondSizeIncludeNul - count + offset] = second[secondSizeIncludeNul - count];
-		}
-		for (int index = 1; index < offset + 1; index++)
-		{
-			second[index] = 0;
-		}
-	}
-	else if (firstSizeIncludeNul < secondSizeIncludeNul)
-	{
-		offset = secondSizeIncludeNul - firstSizeIncludeNul;
-		for (int count = 0; count < firstSizeIncludeNul; count++)
-		{
-			first[firstSizeIncludeNul - count + offset] = first[firstSizeIncludeNul - count];
-		}
-		for (int index = 1; index < offset + 1; index++)
-		{
-			first[index] = 0;
-		}
-	}
+    }
+    second[currentIndex] = '\0';
+    secondSizeIncludeNul = currentIndex;
+    currentIndex = 0;
+    ////////////////////////////////////////////////////////////////////////////////////////////////// ÀÚ¸®¼ö ¸ÂÃß±â
+    if (firstSizeIncludeNul > secondSizeIncludeNul)
+    {
+        offset = firstSizeIncludeNul - secondSizeIncludeNul;
+        for (int count = 0; count < secondSizeIncludeNul; count++)
+        {
+            second[secondSizeIncludeNul - count + offset] = second[secondSizeIncludeNul - count];
+        }
+        for (int index = 1; index < offset + 1; index++)
+        {
+            second[index] = '0';
+        }
+    }
+    else if (firstSizeIncludeNul < secondSizeIncludeNul)
+    {
+        offset = secondSizeIncludeNul - firstSizeIncludeNul;
+        for (int count = 0; count < firstSizeIncludeNul; count++)
+        {
+            first[firstSizeIncludeNul - count + offset] = first[firstSizeIncludeNul - count];
+        }
+        for (int index = 1; index < offset + 1; index++)
+        {
+            first[index] = '0';
+        }
+    }
 
-	return 0;
+    return 0;
 }
 
-
 int main() {
-	char firstNumber[MAX_LENGTH];
-	char secondNumber[MAX_LENGTH];
-	char operator[2];  // ì—°ì‚°ìžë¥¼ ìœ„í•œ ë°°ì—´
-	char* res;
+    char firstNumber[MAX_LENGTH];
+    char secondNumber[MAX_LENGTH];
+    char operator[2];  // ¿¬»êÀÚ¸¦ À§ÇÑ ¹è¿­
+    char* res;
 
-	while (1) {
-		int inputErr = inputProc(firstNumber, secondNumber, operator);
-		if (inputErr == 0 && *operator == '0') {
-			break;
-		}
-		if (inputErr == 1) {
-			continue;
-		}
+    while (1) {
+        int inputErr = inputProc(firstNumber, secondNumber, operator);
+        if (inputErr == 0 && *operator == '0') {
+            break;
+        }
+        if (inputErr == 1) {
+            continue;
+        }
 
-		int functionCall = operatorSelector(firstNumber, secondNumber, operator);
-		switch (functionCall) {
-		case 0:
-			// add í•¨ìˆ˜ call
-			break;
-		case 1:
-			res = getMinus(firstNumber, secondNumber);
-			printf("ê²°ê³¼: %s\n", res);
-			free(res);
-			break;
-		default:
-			printf("ì§€ì›ë˜ì§€ ì•ŠëŠ” ì—°ì‚°ìžìž…ë‹ˆë‹¤.\n");
-			break;
-		}
+        int functionCall = operatorSelector(firstNumber, secondNumber, operator);
+        switch (functionCall) {
+        case 0:
+            // add ÇÔ¼ö call
+            /*res = getAdd(firstNumber, secondNumber);
+            printf("°á°ú: %s\n", res);
+            free(res);*/
+            break;
+        case 1:
+            printf("Ã¹¹øÂ° ¼ýÀÚ : %s\n", firstNumber);
+            printf("µÎ¹øÂ° ¼ýÀÚ : %s\n", secondNumber);
+            res = getMinus(firstNumber, secondNumber);
+            printf("°á°ú: %s\n", res);
+            free(res);
+            break;
+        default:
+            printf("Áö¿øµÇÁö ¾Ê´Â ¿¬»êÀÚÀÔ´Ï´Ù.\n");
+            break;
+        }
 
-		puts("ë©”ë‰´ë¡œ ëŒì•„ê°€ê¸° ìœ„í•´ì„œ Enterë¥¼ ëˆŒëŸ¬ì£¼ì„¸ìš”.");
-		getchar();  // Enter í‚¤ ìž…ë ¥ ëŒ€ê¸°
+        puts("¸Þ´º·Î µ¹¾Æ°¡±â À§ÇØ¼­ Enter¸¦ ´­·¯ÁÖ¼¼¿ä.");
+        getchar();  // Enter Å° ÀÔ·Â ´ë±â
+    }
 
-
-	}
-
-	puts("ê³„ì‚°ê¸°ë¥¼ ì¢…ë£Œí•˜ê² ìŠµë‹ˆë‹¤.");
-	return 0;
+    puts("°è»ê±â¸¦ Á¾·áÇÏ°Ú½À´Ï´Ù.");
+    return 0;
 }
 
 int operatorSelector(char* first, char* second, char* operator) {
-	int result; //0 ì´ë©´ add ì—°ì‚°ìž call , 1ì´ë©´ sub ì—°ì‚°ìž call
+    int result; //0 ÀÌ¸é add ¿¬»êÀÚ call , 1ÀÌ¸é sub ¿¬»êÀÚ call
 
-	// ì—°ì‚°ìžê°€ - ì¼ë•Œ, ë‘ë²ˆì§¸ ë¶€í˜¸ ë°˜ì „  
-	if (*operator == '-') {
-		if (second[0] == '-') {
-			second[0] = '+';
-		}
-		else {
-			second[0] = '-';
-		}
-	}
+    // ¿¬»êÀÚ°¡ - ÀÏ¶§, µÎ¹øÂ° ºÎÈ£ ¹ÝÀü  
+    if (*operator == '-') {
+        if (second[0] == '-') {
+            second[0] = '+';
+        }
+        else {
+            second[0] = '-';
+        }
+    }
 
-	if (first[0] == second[0]) {
-		//ê°™ì€ ë¶€í˜¸ì¼ ë•Œë§Œ add í˜¸ì¶œ 
-		result = 0;
-	}
-	else {
-		//xor ì¼ë•Œë§Œ sub í˜¸ì¶œ 
-		result = 1;
-	}
+    if (first[0] == second[0]) {
+        //°°Àº ºÎÈ£ÀÏ ¶§¸¸ add È£Ãâ 
+        result = 0;
+    }
+    else {
+        //xor ÀÏ¶§¸¸ sub È£Ãâ 
+        result = 1;
+    }
 
-	return result;
+    return result;
 }

@@ -62,24 +62,7 @@ void subtractNum(int lena, int lenb, int signa, char* a, char* b, char* val) {
         
         lena--;
     }
-    /*
-    while (lena >= 0 && borrow_bit) {
-        int x = a[lena] - '0';
-        if (x < borrow_bit) {
-            x += 10; // borrow from the next digit
-            borrow_bit = 1;
-        }
-        else {
-            borrow_bit = 0;
-        }
-        res[lena] = x - borrow_bit + '0';
-        lena--;
-    }
 
-    int idx = 0;
-    while (idx < 100 && res[idx] == '0') {
-        idx++;
-    }*/
     int tempx = a[lena] - '0';
     tempx = digitMinus(tempx, borrow_bit);
     res[lena] = tempx + '0';
