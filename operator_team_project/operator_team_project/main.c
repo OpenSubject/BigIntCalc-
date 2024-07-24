@@ -214,14 +214,14 @@ int main() {
             break;
 
         case 2:
-            res = getMinus(num1, num2);
+            res = getMinus(firstNumber, secondNumber);
             printf("결과: %s\n", res);
             free(res);
             break;
         }
 
-        free(num1);
-        free(num2);
+        free(firstNumber);
+        free(secondNumber);
 
         puts("메뉴로 돌아가기 위해서 Enter를 눌러주세요.");
         getchar();
