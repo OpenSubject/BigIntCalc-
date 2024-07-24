@@ -35,23 +35,34 @@ void subtractNum(int lena, int lenb, int signa, char* a, char* b, char* val) {
         int x = a[lena] - '0';
         int y = b[i] - '0';
 
-        if (x < y + borrow_bit) {
-            x += 10; // borrow from the next digit
+        if (x == 0) {
+            x = tenSum(x);
             temp = 1;
         }
-        x = x - y - borrow_bit;
+        x = digitMinus(x, borrow_bit);
+        if (x == 10 && y == 0) {
+            res[lena] = '0';
+            lena--;
+            continue;
+        }
 
-        if (temp) {
+        if (x < y) {
+            x = tenSum(x);
             borrow_bit = 1;
         }
         else {
             borrow_bit = 0;
         }
-
+        x = digitMinus(x, y);
         res[lena] = x + '0';
+        if (temp == 1) {
+            borrow_bit = 1;
+        }
+        x = digitMinus(x, borrow_bit);
+        
         lena--;
     }
-
+    /*
     while (lena >= 0 && borrow_bit) {
         int x = a[lena] - '0';
         if (x < borrow_bit) {
@@ -68,8 +79,19 @@ void subtractNum(int lena, int lenb, int signa, char* a, char* b, char* val) {
     int idx = 0;
     while (idx < 100 && res[idx] == '0') {
         idx++;
-    }
+    }*/
+    int tempx = a[lena] - '0';
+    tempx = digitMinus(tempx, borrow_bit);
+    res[lena] = tempx + '0';
+    int nr = strlen(res);
 
+    int idx = 0;
+    for (int i = 0; i < nr; i++) {
+        if (res[i] != '0') {
+            idx = i;
+            break;
+        }
+    }
     int start = 0;
     if (signa == -1) {
         val[0] = '-';
