@@ -1,21 +1,21 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "operator.h" // �ʿ��� ��� ���� ����
+#include "operator.h" // 필요한 헤더 파일 포함
 
 #define MAX_LENGTH 32
 
-int inputProc(char* first, char* second, char* operator) // ���� : 0 return, ���� : 1 return
+int inputProc(char* first, char* second, char* operator) // 성공 : 0 return, 실패 : 1 return
 {
-	char firstNumberSign; // ù��° �Է��� ��ȣ
-	char firstSizeIncludeNul; // ù��° �Է��� ũ�� (��ȣ, null ����)
-	char secondNumberSign; // �ι�° �Է��� ��ȣ
-	char secondSizeIncludeNul;  // �ι�° �Է��� ũ�� (��ȣ, null ����)
+	char firstNumberSign; // 첫번째 입력의 부호
+	char firstSizeIncludeNul; // 첫번째 입력의 크기 (부호, null 포함)
+	char secondNumberSign; // 두번째 입력의 부호
+	char secondSizeIncludeNul;  // 두번째 입력의 크기 (부호, null 포함)
 	char currentIndex = 0;
 	char currentData;
-	char offset; // �Է��� ũ�� ����
+	char offset; // 입력의 크기 차이
 
-	printf("ù��° ���� : ");
+	printf("첫번째 숫자 : ");
 	firstNumberSign = getchar();
 	if (firstNumberSign >= '0' && firstNumberSign <= '9')
 	{
@@ -30,8 +30,8 @@ int inputProc(char* first, char* second, char* operator) // ���� : 0 ret
 	}
 	else
 	{
-		printf("�߸��� �Է°�");
-		while (getchar() != '\n') // �Է� ���� ����
+		printf("잘못된 입력값");
+		while (getchar() != '\n') // 입력 버퍼 비우기
 		{
 			continue;
 		}
@@ -46,8 +46,8 @@ int inputProc(char* first, char* second, char* operator) // ���� : 0 ret
 		}
 		else
 		{
-			printf("�߸��� �Է°�");
-			while (getchar() != '\n') // �Է� ���� ���� 
+			printf("잘못된 입력값");
+			while (getchar() != '\n') // 입력 버퍼 비우기 
 			{
 				continue;
 			}
@@ -59,31 +59,31 @@ int inputProc(char* first, char* second, char* operator) // ���� : 0 ret
 	firstSizeIncludeNul = currentIndex;
 	currentIndex = 0;
 
-	printf("������ (+, -, *, /) : ");
+	printf("연산자 (+, -) or 0(EXIT): ");
 	currentData = getchar();
-	if ((currentData == '+') || (currentData == '-') || (currentData == '*') || (currentData == '/'))
+	if ((currentData == '+') || (currentData == '-') || (currentData == '0'))
 	{
 		*operator=currentData;
-		while (getchar() != '\n') // �Է� ���� ����
+		while (getchar() != '\n') // 입력 버퍼 비우기
 		{
 			continue;
 		}
 	}
 	else
 	{
-		printf("�߸��� �Է°�");
-		while (getchar() != '\n') // �Է� ���� ���� 
+		printf("잘못된 입력값");
+		while (getchar() != '\n') // 입력 버퍼 비우기 
 		{
 			continue;
 		}
 		return 1;
 	}
 
-	printf("�ι�° ���� : ");
+	printf("두번째 숫자 : ");
 	secondNumberSign = getchar();
 	if (secondNumberSign >= '0' && secondNumberSign <= '9')
 	{
-		second[currentIndex++] = 0;
+		second[currentIndex++] = '+';
 		second[currentIndex++] = secondNumberSign - '0';
 		secondNumberSign = 0;
 	}
@@ -94,8 +94,8 @@ int inputProc(char* first, char* second, char* operator) // ���� : 0 ret
 	}
 	else
 	{
-		printf("�߸��� �Է°�");
-		while (getchar() != '\n') // �Է� ���� ����
+		printf("잘못된 입력값");
+		while (getchar() != '\n') // 입력 버퍼 비우기
 		{
 			continue;
 		}
@@ -110,8 +110,8 @@ int inputProc(char* first, char* second, char* operator) // ���� : 0 ret
 		}
 		else
 		{
-			printf("�߸��� �Է°�");
-			while (getchar() != '\n') // �Է� ���� ���� 
+			printf("잘못된 입력값");
+			while (getchar() != '\n') // 입력 버퍼 비우기 
 			{
 				continue;
 			}
@@ -122,7 +122,7 @@ int inputProc(char* first, char* second, char* operator) // ���� : 0 ret
 	second[currentIndex] = '\0';
 	secondSizeIncludeNul = currentIndex;
 	currentIndex = 0;
-	////////////////////////////////////////////////////////////////////////////////////////////////// �ڸ��� ���߱�
+	////////////////////////////////////////////////////////////////////////////////////////////////// 자리수 맞추기
 	if (firstSizeIncludeNul > secondSizeIncludeNul)
 	{
 		offset = firstSizeIncludeNul - secondSizeIncludeNul;
@@ -152,85 +152,67 @@ int inputProc(char* first, char* second, char* operator) // ���� : 0 ret
 }
 
 
-// �޴� ��� �Լ�
-int print_menu(void) {
-    int nInput = 0;
-    system("cls");
-    printf("[1] ���� \t[2] ���� \t[0] Exit\n");
-
-    while (1) {
-        int result = scanf_s("%d", &nInput);
-        if (result != 1) {
-            printf("�߸��� �Է��Դϴ�. ���ڸ� �Է����ּ���.\n");
-            while (getchar() != '\n');
-        }
-        else {
-            if (nInput < 0 || nInput > 2) {
-                printf("�߸� �Է��ϼ̽��ϴ�. 0~2 ���� ������ �ٽ� �������ּ���.\n");
-                while (getchar() != '\n');
-            }
-            else {
-                break;
-            }
-        }
-    }
-
-    return nInput;
-}
-
-// �Է� �� �ޱ� �Լ�
-//char* getInput(const char* prompt) {
-//
-//}
-
 int main() {
-
-    char* res;
-
 	char firstNumber[MAX_LENGTH];
 	char secondNumber[MAX_LENGTH];
-	char operator;
+	char operator[2];  // 연산자를 위한 배열
+	char* res;
 
-	while (1)
-	{
-		int inputErr = inputProc(firstNumber, secondNumber, &operator);
-		if (inputErr == 0)
-		{
+	while (1) {
+		int inputErr = inputProc(firstNumber, secondNumber, operator);
+		if (inputErr == 0 && *operator == '0') {
 			break;
+		}
+		if (inputErr == 1) {
+			continue;
+		}
+
+		int functionCall = operatorSelector(firstNumber, secondNumber, operator);
+		switch (functionCall) {
+		case 0:
+			// add 함수 call
+			break;
+		case 1:
+			res = getMinus(firstNumber, secondNumber);
+			printf("결과: %s\n", res);
+			free(res);
+			break;
+		default:
+			printf("지원되지 않는 연산자입니다.\n");
+			break;
+		}
+
+		puts("메뉴로 돌아가기 위해서 Enter를 눌러주세요.");
+		getchar();  // Enter 키 입력 대기
+
+
+	}
+
+	puts("계산기를 종료하겠습니다.");
+	return 0;
+}
+
+int operatorSelector(char* first, char* second, char* operator) {
+	int result; //0 이면 add 연산자 call , 1이면 sub 연산자 call
+
+	// 연산자가 - 일때, 두번째 부호 반전  
+	if (*operator == '-') {
+		if (second[0] == '-') {
+			second[0] = '+';
+		}
+		else {
+			second[0] = '-';
 		}
 	}
 
-    while (1) {
-        operator = print_menu();
+	if (first[0] == second[0]) {
+		//같은 부호일 때만 add 호출 
+		result = 0;
+	}
+	else {
+		//xor 일때만 sub 호출 
+		result = 1;
+	}
 
-        if (operator == 0) {
-            break;
-        }
-
-
-        switch (operator) {
-        case 1:
-            // ���� ó�� �ڵ� (���� �߰�)
-            res = add(firstNumber, secondNumber);
-            printf("결과: %s\n", res);
-            free(res);
-            break;
-
-        case 2:
-            res = getMinus(firstNumber, secondNumber);
-            printf("���: %s\n", res);
-            free(res);
-            break;
-        }
-
-        free(firstNumber);
-        free(secondNumber);
-
-        puts("�޴��� ���ư��� ���ؼ� Enter�� �����ּ���.");
-        getchar();
-        getchar();
-    }
-
-    puts("���⸦ �����ϰڽ��ϴ�.");
-    return 0;
+	return result;
 }

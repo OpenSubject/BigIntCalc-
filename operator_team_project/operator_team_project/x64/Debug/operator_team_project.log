@@ -1,8 +1,55 @@
 ﻿  add.c
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\add.c(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\add.c(42,16): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\add.c(83,36): error C2057: 상수 식이 필요합니다.
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\add.c(83,39): error C2466: 상수 크기 0의 배열을 할당할 수 없습니다.
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\add.c(83,8): error C2133: 'reversed_first': 알 수 없는 크기입니다.
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\add.c(84,38): error C2057: 상수 식이 필요합니다.
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\add.c(84,41): error C2466: 상수 크기 0의 배열을 할당할 수 없습니다.
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\add.c(84,8): error C2133: 'reversed_second': 알 수 없는 크기입니다.
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\add.c(79,22): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\add.c(79,58): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   main.c
-  sub.c
-C:\Users\sukyung\source\repos\BigIntCalc-\operator_team_project\operator_team_project\sub.c(93,1): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\sukyung\source\repos\BigIntCalc-\operator_team_project\operator_team_project\sub.c(94,1): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(33,10): error C2001: 상수에 줄 바꿈 문자가 있습니다.
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(34,3): error C2143: 구문 오류: ')'이(가) 'while' 앞에 없습니다.
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(41,2): error C2059: 구문 오류: 'while'
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(49,11): error C2001: 상수에 줄 바꿈 문자가 있습니다.
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(58,20): error C2065: 'currentIndex': 선언되지 않은 식별자입니다.
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(58,8): error C2057: 상수 식이 필요합니다.
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(58,20): error C2466: 상수 크기 0의 배열을 할당할 수 없습니다.
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(58,24): error C2075: 'first': 초기화에는 중괄호로 묶인 이니셜라이저 목록이 필요합니다.
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(59,36): error C2065: 'currentIndex': 선언되지 않은 식별자입니다.
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(59,2): error C2099: 이니셜라이저가 상수가 아닙니다.
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(62,9): error C2143: 구문 오류: ')'이(가) '문자열' 앞에 없습니다.
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(62,9): error C2143: 구문 오류: '{'이(가) '문자열' 앞에 없습니다.
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(62,9): error C2059: 구문 오류: '문자열'
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(62,39): error C2059: 구문 오류: ')'
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(63,2): error C2099: 이니셜라이저가 상수가 아닙니다.
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(64,2): error C2059: 구문 오류: 'if'
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(72,2): error C2059: 구문 오류: 'else'
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(74,10): error C2001: 상수에 줄 바꿈 문자가 있습니다.
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(82,9): error C2143: 구문 오류: ')'이(가) '문자열' 앞에 없습니다.
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(82,9): error C2143: 구문 오류: '{'이(가) '문자열' 앞에 없습니다.
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(82,9): error C2059: 구문 오류: '문자열'
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(82,32): error C2059: 구문 오류: ')'
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(83,2): error C2099: 이니셜라이저가 상수가 아닙니다.
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(84,2): error C2059: 구문 오류: 'if'
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(90,2): error C2059: 구문 오류: 'else'
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(95,2): error C2059: 구문 오류: 'else'
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(97,10): error C2001: 상수에 줄 바꿈 문자가 있습니다.
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(105,2): error C2059: 구문 오류: 'while'
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(113,11): error C2001: 상수에 줄 바꿈 문자가 있습니다.
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(122,9): error C2057: 상수 식이 필요합니다.
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(122,21): error C2466: 상수 크기 0의 배열을 할당할 수 없습니다.
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(122,25): error C2075: 'second': 초기화에는 중괄호로 묶인 이니셜라이저 목록이 필요합니다.
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(123,2): error C2099: 이니셜라이저가 상수가 아닙니다.
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(124,2): error C2374: 'currentIndex': 재정의. 여러 번 초기화했습니다.
+  C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(60,2):
+  'currentIndex' 선언을 참조하십시오.
+  
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(126,2): error C2059: 구문 오류: 'if'
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(138,2): error C2059: 구문 오류: 'else'
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(151,2): error C2059: 구문 오류: 'return'
+C:\work\c_calc_project_team_git\BigIntCalc-\operator_team_project\operator_team_project\main.c(152,1): error C2059: 구문 오류: '}'
   코드를 생성하고 있습니다...
-  operator.h
-  operator_team_project.vcxproj -> C:\Users\sukyung\Source\Repos\BigIntCalc-\operator_team_project\x64\Debug\operator_team_project.exe
