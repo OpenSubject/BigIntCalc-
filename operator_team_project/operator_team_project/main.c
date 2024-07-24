@@ -87,7 +87,7 @@ int inputProc(char* first, char* second, char* operator) // ¼º°ø : 0 return, ½ÇÆ
 		second[currentIndex++] = secondNumberSign - '0';
 		secondNumberSign = 0;
 	}
-	else if (firstNumberSign == '-')
+	else if (secondNumberSign == '-')
 	{
 		second[currentIndex++] = '-';
 		secondNumberSign = 1;
