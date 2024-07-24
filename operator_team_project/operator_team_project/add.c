@@ -4,15 +4,10 @@
 #include <ctype.h>
 
 
-// 오해로 구성한 함수, size는 이런 의미가 아니다.
-// size는 덩어리 안의 총개수이지 청크의 갯수를 의미하는게 아니다.
-int get_chunk_num(int length){
-  // 32기준 이었을때
-  // int size = (length % 32) ? length / 32 + 1 : length / 32;
-  // return size;
-
-  // 31기준으로 변경 -> int 계산시 자리 올림값처리 위함.
-  return (length + 17) / 18;
+// 청크 단위가 맞는거 같다....
+// 지금 여러가지 개념이 들어와서 헷갈리지만
+int get_chunk_num(int length) {
+  return (length + 18) / 19;
 }
 
 long long get_value_of_separates(char* separates){
@@ -22,19 +17,27 @@ long long get_value_of_separates(char* separates){
   
   long long separates_num = atoll(separates);
   // printf("문자열값 %s\n", separates);
-  // printf("정수값 %ld\n", separates_num);
+  // printf("정수값 %lld\n", separates_num);
   return separates_num;
 }
 
-void remove_zeros(char* str) {
-    int index = 0;
+void remove_sign(char* str) {
+    memmove(str, str + 1, strlen(str));
+}
 
-    // 문자열의 앞부분에서 '0'을 건너뛰기
+void remove_zeros(char* str, int carry) {
+    // carry가 0보다 크면 0을 지우지 않는다.
+    if (carry > 0) {
+        return;
+    }
+
+    // 문자열 앞에 있는 0을 지운다.
+    int index = 0;
     while (str[index] == '0') {
         index++;
     }
 
-    // 문자열의 앞부분에 '0'이 없을 경우
+    // index가 0이 아니라면, 앞에 있는 0을 제거
     if (index > 0) {
         int i = 0;
         while (str[index]) {
@@ -57,7 +60,7 @@ void split_number(const char* str, char result[][19], int chunk_num, int size, i
 
   int result_index = chunk_num - 1; // 역순으로 채우기 위해 초기 인덱스를 끝으로 설정
   int chunk_pos = 0;
-  char temp[20] = {0}; // 임시 배열 초기화
+  char temp[19] = {0}; // 임시 배열 초기화
 
   for (int pos = str_len - 1; pos >= 0; pos--) {
       // 임시 배열에 저장
@@ -92,9 +95,9 @@ void split_number(const char* str, char result[][19], int chunk_num, int size, i
     result[result_index][chunk_pos] = '\0'; // 널 문자 추가
 
     // printf("Final chunk processed: %d\n", result_index);
-    for (int j = 0; j < chunk_num; j++) {
-        printf("Chunk %d: %s\n", j, result[j]);
-    }
+    // for (int j = 0; j < chunk_num; j++) {
+    //     printf("Chunk %d: %s\n", j, result[j]);
+    // }
   }
 
   // printf("Origial String : %s\n", str);
@@ -106,7 +109,7 @@ void split_number(const char* str, char result[][19], int chunk_num, int size, i
 
 // 리턴이 가능하도록 포인터를 이용해본다.
 // const를 적용시켜서 함수내에서 바뀌지않음을 보장한다.
-char* add(const char* first, const char* second){
+char* add(char* first, char* second){
   // 계산 가능한 범위로 나눈다.
   // 반복문으로 처리한다고 가정
   // 필요한건 계산이 처리가 완성되었을때 사용될 문자열과
@@ -126,7 +129,15 @@ char* add(const char* first, const char* second){
   }
 
   char sign = first[0];
-  const int first_length = strlen(first), second_length = strlen(second);
+
+  char* first_copy = strdup(first);
+  char* second_copy = strdup(second);
+
+  // 부호삭제
+  remove_sign(first_copy);
+  remove_sign(second_copy);
+
+  const int first_length = strlen(first_copy), second_length = strlen(second_copy);
   const int chunk_size = 19;
 
   // chunk num 필요해서 계산한다.
@@ -142,17 +153,17 @@ char* add(const char* first, const char* second){
 
   // 중간 배열 -> 각 인자를 int계산이 가능한 범위로 나눠서 넣는 배열.
   char first_separates[first_length][chunk_size], second_separates[second_length][chunk_size];
-  
-  for (int i = 0; i<4; i++){
-    printf("배열크기 %ld", sizeof(first_separates) / sizeof(first_separates[0]));
-  }
+
+  // for (int i = 0; i<4; i++){
+  //   printf("배열크기 %ld", sizeof(first_separates) / sizeof(first_separates[0]));
+  // }
 
   // 중간 배열로 나누는 처리
-  split_number(first, first_separates, first_chunk_num, 18, first_length);
-  split_number(second, second_separates, second_chunk_num, 18, second_length);
+  split_number(first_copy, first_separates, first_chunk_num, chunk_size - 1, first_length);
+  split_number(second_copy, second_separates, second_chunk_num, chunk_size - 1, second_length);
 
   char final_str_list[chunk_num][19];
-  // memset(final_str_list, 0, lenght )
+  memset(final_str_list, 0, sizeof(final_str_list));
 
   for (int i = chunk_num - 1; i >= 0; i--) {
     long long sum_value = 0;
@@ -165,22 +176,27 @@ char* add(const char* first, const char* second){
     first_separates_int_value = get_value_of_separates(first_separates[i]);
     second_separates_int_value = get_value_of_separates(second_separates[i]);
     sum_value += first_separates_int_value + second_separates_int_value + carry_value;
+    printf("합: %lld\n", sum_value);
 
-    char sum_str[19] = {0};
+    char sum_str[20] = {0};
 
     snprintf(sum_str, sizeof(sum_str), "%019lld", sum_value);
-    printf("문자열 %s\n", sum_str);
-    remove_zeros(sum_str);
+    // printf("문자열 %s\n", sum_str);
+  
+    remove_zeros(sum_str, carry_value);
 
-    printf("문자열2 %s\n", sum_str);
-    if (strlen(sum_str) > 18) {
+    printf("문자열 %s\n", sum_str);
+    if (strlen(sum_str) > 19) {
       carry_value = atoi(&sum_str[0]);
-      memmove(sum_str, sum_str + 1, 18);
-      sum_str[18] = '\0';
+      memmove(sum_str, sum_str + 1, 19);
+      sum_str[19] = '\0';
     } else {
       carry_value = 0;
     }
-    printf("자리올림 %lld\n", carry_value);
+    // printf("자리올림 %lld\n", carry_value);
+
+    // 자리 올림을 제외하고 값들을 리스트에 거꾸로 저장
+    strcpy(final_str_list[i], sum_str);
   }
 
 
@@ -192,8 +208,11 @@ char* add(const char* first, const char* second){
 
   // 두개의 부호가 같다는 가정하에 처리
   // 문자열을 나눠서 다시 저장하는게 먼저일까?
-
-  printf("Final Result: %s\n", results);
+  for (int i = 0; i <= chunk_num; i++) {
+    printf("%s", final_str_list[i]);
+  }
+  printf("\n");
+  // printf("Final Result: %s\n", results);
 
   return first;
 }
