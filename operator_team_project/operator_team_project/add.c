@@ -119,10 +119,6 @@ char *getAdd(char *first, char *second)
 
     for (int i = 0; i <= length; i++)
     {
-        if (i == 0)
-        {
-            results[0] = '\n';
-        }
         int first_value = 0, second_value = 0;
 
         if (i <= first_length - 1)
@@ -150,6 +146,9 @@ char *getAdd(char *first, char *second)
         }
         results[i + 1] = result + '0';
     }
+
+    // 널 문자 추가
+    results[length + 1] = '\0';
 
     // 다시 거꾸로 재배열 처리 준비
     char *reversed_results = malloc(length + 2);
