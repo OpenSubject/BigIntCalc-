@@ -144,7 +144,7 @@ char *getAdd(char *first, char *second)
             carry_in = 0;
             result = sum;
         }
-        results[i + 1] = result + '0';
+        results[i] = result + '0';
     }
 
     // 널 문자 추가

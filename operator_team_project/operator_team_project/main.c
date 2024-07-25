@@ -270,6 +270,7 @@ int main()
             output = outputBuilder(res);
             printf(" output 결과: %s\n", output);
             free(res);
+            free(output);
             break;
         case 1:
             printf("첫번째 숫자 : %s\n", firstNumber);
@@ -279,6 +280,7 @@ int main()
             output = outputBuilder(res);
             printf(" output 결과: %s\n", output);
             free(res);
+            free(output);
             break;
         default:
             printf("지원되지 않는 연산자입니다.\n");

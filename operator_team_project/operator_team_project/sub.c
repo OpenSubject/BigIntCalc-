@@ -101,7 +101,7 @@ void subtractNum(int lena, int lenb, int signa, char *a, char *b, char *val)
         val[start] = res[i];
         start += 1;
     }
-    val[start] = '\0'; // ���ڿ� ���� ���������� ����
+    val[start] = '\0'; 
 }
 
 char *getMinus(char *a, char *b)
@@ -136,8 +136,23 @@ char *getMinus(char *a, char *b)
         lenb -= 1;
         signb = -1;
     }
+    if (a[0] == '+') {
+        for (int i = 1; i < lena; i++) {
+            a[i - 1] = a[i];
+        }
+        a[lena - 1] = '\n';
+        lena -= 1;
+    }
 
-    char *res = (char *)malloc(100 * sizeof(char)); // ���� �޸� �Ҵ�
+    if (b[0] == '+') {
+        for (int i = 1; i < lenb; i++) {
+            b[i - 1] = b[i];
+        }
+        b[lenb - 1] = '\n';
+        lenb -= 1;
+    }
+
+    char *res = (char *)malloc(100 * sizeof(char)); 
     if (res == NULL)
     {
         printf("�޸� �Ҵ� ����\n");
