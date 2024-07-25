@@ -5,12 +5,12 @@
 
 #define MAX_LENGTH 32
 
-int inputProc(char* first, char* second, char* operator) // ¼º°ø : 0 return, ½ÇÆÐ : 1 return
+int inputProc(char *first, char *second, char *operator) // ¼º°ø : 0 return, ½ÇÆÐ : 1 return
 {
-    char firstNumberSign; // Ã¹¹øÂ° ÀÔ·ÂÀÇ ºÎÈ£
-    char firstSizeIncludeNul; // Ã¹¹øÂ° ÀÔ·ÂÀÇ Å©±â (ºÎÈ£, null Æ÷ÇÔ)
-    char secondNumberSign; // µÎ¹øÂ° ÀÔ·ÂÀÇ ºÎÈ£
-    char secondSizeIncludeNul;  // µÎ¹øÂ° ÀÔ·ÂÀÇ Å©±â (ºÎÈ£, null Æ÷ÇÔ)
+    char firstNumberSign;      // Ã¹¹øÂ° ÀÔ·ÂÀÇ ºÎÈ£
+    char firstSizeIncludeNul;  // Ã¹¹øÂ° ÀÔ·ÂÀÇ Å©±â (ºÎÈ£, null Æ÷ÇÔ)
+    char secondNumberSign;     // µÎ¹øÂ° ÀÔ·ÂÀÇ ºÎÈ£
+    char secondSizeIncludeNul; // µÎ¹øÂ° ÀÔ·ÂÀÇ Å©±â (ºÎÈ£, null Æ÷ÇÔ)
     char currentIndex = 0;
     char currentData;
     char offset; // ÀÔ·ÂÀÇ Å©±â Â÷ÀÌ
@@ -47,13 +47,12 @@ int inputProc(char* first, char* second, char* operator) // ¼º°ø : 0 return, ½ÇÆ
         else
         {
             printf("Àß¸øµÈ ÀÔ·Â°ª\n");
-            while (getchar() != '\n') // ÀÔ·Â ¹öÆÛ ºñ¿ì±â 
+            while (getchar() != '\n') // ÀÔ·Â ¹öÆÛ ºñ¿ì±â
             {
                 continue;
             }
             return 1;
         }
-
     }
     first[currentIndex] = '\0';
     firstSizeIncludeNul = currentIndex;
@@ -63,7 +62,7 @@ int inputProc(char* first, char* second, char* operator) // ¼º°ø : 0 return, ½ÇÆ
     currentData = getchar();
     if ((currentData == '+') || (currentData == '-') || (currentData == '0'))
     {
-        *operator = currentData;
+        *operator= currentData;
         while (getchar() != '\n') // ÀÔ·Â ¹öÆÛ ºñ¿ì±â
         {
             continue;
@@ -72,7 +71,7 @@ int inputProc(char* first, char* second, char* operator) // ¼º°ø : 0 return, ½ÇÆ
     else
     {
         printf("Àß¸øµÈ ÀÔ·Â°ª\n");
-        while (getchar() != '\n') // ÀÔ·Â ¹öÆÛ ºñ¿ì±â 
+        while (getchar() != '\n') // ÀÔ·Â ¹öÆÛ ºñ¿ì±â
         {
             continue;
         }
@@ -111,13 +110,12 @@ int inputProc(char* first, char* second, char* operator) // ¼º°ø : 0 return, ½ÇÆ
         else
         {
             printf("Àß¸øµÈ ÀÔ·Â°ª\n");
-            while (getchar() != '\n') // ÀÔ·Â ¹öÆÛ ºñ¿ì±â 
+            while (getchar() != '\n') // ÀÔ·Â ¹öÆÛ ºñ¿ì±â
             {
                 continue;
             }
             return 1;
         }
-
     }
     second[currentIndex] = '\0';
     secondSizeIncludeNul = currentIndex;
@@ -151,28 +149,64 @@ int inputProc(char* first, char* second, char* operator) // ¼º°ø : 0 return, ½ÇÆ
     return 0;
 }
 
-int main() {
+int operatorSelector(char *first, char *second, char *operator)
+{
+    int result; // 0 ÀÌ¸é add ¿¬»êÀÚ call , 1ÀÌ¸é sub ¿¬»êÀÚ call
+
+    // ¿¬»êÀÚ°¡ - ÀÏ¶§, µÎ¹øÂ° ºÎÈ£ ¹ÝÀü
+    if (*operator== '-')
+    {
+        if (second[0] == '-')
+        {
+            second[0] = '+';
+        }
+        else
+        {
+            second[0] = '-';
+        }
+    }
+
+    if (first[0] == second[0])
+    {
+        // °°Àº ºÎÈ£ÀÏ ¶§¸¸ add È£Ãâ
+        result = 0;
+    }
+    else
+    {
+        // xor ÀÏ¶§¸¸ sub È£Ãâ
+        result = 1;
+    }
+
+    return result;
+}
+
+int main()
+{
     char firstNumber[MAX_LENGTH];
     char secondNumber[MAX_LENGTH];
-    char operator[2];  // ¿¬»êÀÚ¸¦ À§ÇÑ ¹è¿­
-    char* res;
+    char operator[2]; // ¿¬»êÀÚ¸¦ À§ÇÑ ¹è¿­
+    char *res;
 
-    while (1) {
+    while (1)
+    {
         int inputErr = inputProc(firstNumber, secondNumber, operator);
-        if (inputErr == 0 && *operator == '0') {
+        if (inputErr == 0 && *operator== '0')
+        {
             break;
         }
-        if (inputErr == 1) {
+        if (inputErr == 1)
+        {
             continue;
         }
 
         int functionCall = operatorSelector(firstNumber, secondNumber, operator);
-        switch (functionCall) {
+        switch (functionCall)
+        {
         case 0:
             // add ÇÔ¼ö call
-            /*res = getAdd(firstNumber, secondNumber);
+            res = getAdd(firstNumber, secondNumber);
             printf("°á°ú: %s\n", res);
-            free(res);*/
+            free(res);
             break;
         case 1:
             printf("Ã¹¹øÂ° ¼ýÀÚ : %s\n", firstNumber);
@@ -187,34 +221,9 @@ int main() {
         }
 
         puts("¸Þ´º·Î µ¹¾Æ°¡±â À§ÇØ¼­ Enter¸¦ ´­·¯ÁÖ¼¼¿ä.");
-        getchar();  // Enter Å° ÀÔ·Â ´ë±â
+        getchar(); // Enter Å° ÀÔ·Â ´ë±â
     }
 
     puts("°è»ê±â¸¦ Á¾·áÇÏ°Ú½À´Ï´Ù.");
     return 0;
-}
-
-int operatorSelector(char* first, char* second, char* operator) {
-    int result; //0 ÀÌ¸é add ¿¬»êÀÚ call , 1ÀÌ¸é sub ¿¬»êÀÚ call
-
-    // ¿¬»êÀÚ°¡ - ÀÏ¶§, µÎ¹øÂ° ºÎÈ£ ¹ÝÀü  
-    if (*operator == '-') {
-        if (second[0] == '-') {
-            second[0] = '+';
-        }
-        else {
-            second[0] = '-';
-        }
-    }
-
-    if (first[0] == second[0]) {
-        //°°Àº ºÎÈ£ÀÏ ¶§¸¸ add È£Ãâ 
-        result = 0;
-    }
-    else {
-        //xor ÀÏ¶§¸¸ sub È£Ãâ 
-        result = 1;
-    }
-
-    return result;
 }

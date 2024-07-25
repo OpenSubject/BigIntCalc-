@@ -1,11 +1,14 @@
+#include "operator.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
-int tenSum(int x) {
+int tenSum(int x)
+{
     int num = 10;
     int temp = 0;
-    while (num) {
+    while (num)
+    {
         temp = x;
         x = x ^ num;
         num = (temp & num) << 1;
@@ -13,9 +16,11 @@ int tenSum(int x) {
     return x;
 }
 
-int digitMinus(int x, int y) {
+int digitMinus(int x, int y)
+{
     int temp = 0;
-    while (y) {
+    while (y)
+    {
         temp = x;
         x = x ^ y;
         y = ((~temp) & y) << 1;
@@ -23,43 +28,50 @@ int digitMinus(int x, int y) {
     return x;
 }
 
-void subtractNum(int lena, int lenb, int signa, char* a, char* b, char* val) {
+void subtractNum(int lena, int lenb, int signa, char *a, char *b, char *val)
+{
     int borrow_bit = 0;
     lena -= 1;
 
-    char res[100] = { 0 };
+    char res[100] = {0};
     strcpy_s(res, sizeof(res), a);
 
-    for (int i = lenb - 1; i >= 0; i--) {
+    for (int i = lenb - 1; i >= 0; i--)
+    {
         int temp = 0;
         int x = a[lena] - '0';
         int y = b[i] - '0';
 
-        if (x == 0) {
+        if (x == 0)
+        {
             x = tenSum(x);
             temp = 1;
         }
         x = digitMinus(x, borrow_bit);
-        if (x == 10 && y == 0) {
+        if (x == 10 && y == 0)
+        {
             res[lena] = '0';
             lena--;
             continue;
         }
 
-        if (x < y) {
+        if (x < y)
+        {
             x = tenSum(x);
             borrow_bit = 1;
         }
-        else {
+        else
+        {
             borrow_bit = 0;
         }
         x = digitMinus(x, y);
         res[lena] = x + '0';
-        if (temp == 1) {
+        if (temp == 1)
+        {
             borrow_bit = 1;
         }
         x = digitMinus(x, borrow_bit);
-        
+
         lena--;
     }
 
@@ -69,37 +81,44 @@ void subtractNum(int lena, int lenb, int signa, char* a, char* b, char* val) {
     int nr = strlen(res);
 
     int idx = 0;
-    for (int i = 0; i < nr; i++) {
-        if (res[i] != '0') {
+    for (int i = 0; i < nr; i++)
+    {
+        if (res[i] != '0')
+        {
             idx = i;
             break;
         }
     }
     int start = 0;
-    if (signa == -1) {
+    if (signa == -1)
+    {
         val[0] = '-';
         start = 1;
     }
 
-    for (int i = idx; i < 100 && res[i] != '\0'; i++) {
+    for (int i = idx; i < 100 && res[i] != '\0'; i++)
+    {
         val[start] = res[i];
         start += 1;
     }
-    val[start] = '\0'; // ¹®ÀÚ¿­ ³¡À» ¸í½ÃÀûÀ¸·Î ¼³Á¤
+    val[start] = '\0'; // ï¿½ï¿½ï¿½Ú¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 }
 
-
-char* getMinus(char* a, char* b) {
+char *getMinus(char *a, char *b)
+{
     int lena = strlen(a);
     int lenb = strlen(b);
     int signa = 1;
     int signb = 1;
 
-    if (a[0] != '-' && b[0] != '-' && lena < lenb) {
+    if (a[0] != '-' && b[0] != '-' && lena < lenb)
+    {
         signb = -1;
     }
-    if (a[0] == '-') {
-        for (int i = 1; i < lena; i++) {
+    if (a[0] == '-')
+    {
+        for (int i = 1; i < lena; i++)
+        {
             a[i - 1] = a[i];
         }
         a[lena - 1] = '\0';
@@ -107,8 +126,10 @@ char* getMinus(char* a, char* b) {
         signa = -1;
     }
 
-    if (b[0] == '-') {
-        for (int i = 1; i < lenb; i++) {
+    if (b[0] == '-')
+    {
+        for (int i = 1; i < lenb; i++)
+        {
             b[i - 1] = b[i];
         }
         b[lenb - 1] = '\0';
@@ -116,35 +137,42 @@ char* getMinus(char* a, char* b) {
         signb = -1;
     }
 
-    char* res = (char*)malloc(100 * sizeof(char)); // µ¿Àû ¸Þ¸ð¸® ÇÒ´ç
-    if (res == NULL) {
-        printf("¸Þ¸ð¸® ÇÒ´ç ½ÇÆÐ\n");
+    char *res = (char *)malloc(100 * sizeof(char)); // ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¸ï¿½ ï¿½Ò´ï¿½
+    if (res == NULL)
+    {
+        printf("ï¿½Þ¸ï¿½ ï¿½Ò´ï¿½ ï¿½ï¿½ï¿½ï¿½\n");
         exit(1);
     }
     memset(res, 0, 100 * sizeof(char));
 
-    if (lena < lenb) {
+    if (lena < lenb)
+    {
         subtractNum(lenb, lena, -signb, b, a, res);
     }
-    else if (lena == lenb) {
+    else if (lena == lenb)
+    {
         int flag = 0;
-        for (int i = 0; i < lena; i++) {
-            if (a[i] > b[i]) {
+        for (int i = 0; i < lena; i++)
+        {
+            if (a[i] > b[i])
+            {
                 flag = 1; // a is bigger number
                 break;
             }
         }
-        if (flag == 1) {
+        if (flag == 1)
+        {
             subtractNum(lena, lenb, signa, a, b, res);
         }
-        else {
+        else
+        {
             subtractNum(lenb, lena, -signb, b, a, res);
         }
     }
-    else {
+    else
+    {
         subtractNum(lena, lenb, signa, a, b, res);
     }
 
     return res;
 }
-
