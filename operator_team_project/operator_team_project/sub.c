@@ -152,17 +152,50 @@ char *getMinus(char *a, char *b)
         lenb -= 1;
     }
 
+    int idx = 0;
+    for (int i = 0; i < lenb; i++) {
+        if (b[i] != '0') {
+            idx = i;
+            lenb -= i;
+            break;
+        }
+    }
+    int start = 0;
+    for (int i = idx; i < 100 && b[i] != '\0'; i++) {
+        b[start] = b[i];
+        start += 1;
+
+    }
+    b[start] = '\0'; // 문자열 끝을 명시적으로 설정
+
+    int idxa = 0;
+    for (int i = 0; i < lena; i++) {
+        if (a[i] != '0') {
+            idxa = i;
+            lena -= i;
+            break;
+        }
+    }
+    int starta = 0;
+    for (int i = idxa; i < 100 && a[i] != '\0'; i++) {
+        a[starta] = a[i];
+        starta += 1;
+
+    }
+
+    a[starta] = '\0'; // 문자열 끝을 명시적으로 설정
+
     char *res = (char *)malloc(100 * sizeof(char)); 
     if (res == NULL)
     {
-        printf("�޸� �Ҵ� ����\n");
+        printf("fail malloc \n");
         exit(1);
     }
     memset(res, 0, 100 * sizeof(char));
 
     if (lena < lenb)
     {
-        subtractNum(lenb, lena, -signb, b, a, res);
+        subtractNum(lenb, lena, signb, b, a, res);
     }
     else if (lena == lenb)
     {
@@ -181,7 +214,7 @@ char *getMinus(char *a, char *b)
         }
         else
         {
-            subtractNum(lenb, lena, -signb, b, a, res);
+            subtractNum(lenb, lena, signb, b, a, res);
         }
     }
     else

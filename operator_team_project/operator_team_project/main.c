@@ -30,7 +30,7 @@ int inputProc(char *first, char *second, char *operator) // ¼º°ø : 0 return, ½ÇÆ
     }
     else
     {
-        printf("Àß¸øµÈ ÀÔ·Â°ª\n");
+        printf("Àß¸øµÈ ÀÔ·Â°ª ÀÔ´Ï´Ù. ÀçÀÔ·Â ÇØÁÖ¼¼¿ä\n");
         while (getchar() != '\n') // ÀÔ·Â ¹öÆÛ ºñ¿ì±â
         {
             continue;
@@ -46,7 +46,7 @@ int inputProc(char *first, char *second, char *operator) // ¼º°ø : 0 return, ½ÇÆ
         }
         else
         {
-            printf("Àß¸øµÈ ÀÔ·Â°ª\n");
+            printf("Àß¸øµÈ ÀÔ·Â°ª ÀÔ´Ï´Ù. ÀçÀÔ·Â ÇØÁÖ¼¼¿ä\n");
             while (getchar() != '\n') // ÀÔ·Â ¹öÆÛ ºñ¿ì±â
             {
                 continue;
@@ -70,7 +70,7 @@ int inputProc(char *first, char *second, char *operator) // ¼º°ø : 0 return, ½ÇÆ
     }
     else
     {
-        printf("Àß¸øµÈ ÀÔ·Â°ª\n");
+        printf("Àß¸øµÈ ÀÔ·Â°ª ÀÔ´Ï´Ù. ÀçÀÔ·Â ÇØÁÖ¼¼¿ä\n");
         while (getchar() != '\n') // ÀÔ·Â ¹öÆÛ ºñ¿ì±â
         {
             continue;
@@ -93,7 +93,7 @@ int inputProc(char *first, char *second, char *operator) // ¼º°ø : 0 return, ½ÇÆ
     }
     else
     {
-        printf("Àß¸øµÈ ÀÔ·Â°ª\n");
+        printf("Àß¸øµÈ ÀÔ·Â°ª ÀÔ´Ï´Ù. ÀçÀÔ·Â ÇØÁÖ¼¼¿ä\n");
         while (getchar() != '\n') // ÀÔ·Â ¹öÆÛ ºñ¿ì±â
         {
             continue;
@@ -109,7 +109,7 @@ int inputProc(char *first, char *second, char *operator) // ¼º°ø : 0 return, ½ÇÆ
         }
         else
         {
-            printf("Àß¸øµÈ ÀÔ·Â°ª\n");
+            printf("Àß¸øµÈ ÀÔ·Â°ª ÀÔ´Ï´Ù. ÀçÀÔ·Â ÇØÁÖ¼¼¿ä\n");
             while (getchar() != '\n') // ÀÔ·Â ¹öÆÛ ºñ¿ì±â
             {
                 continue;
@@ -211,14 +211,14 @@ char* outputBuilder(char* res) {
         exit(EXIT_FAILURE);
     }
 
-    // °á°ú ¹®ÀÚ¿­ »ý¼º
+    // °á°ú ¹®ÀÚ¿­ »ý¼º - ÀüÃ¼ ¹öÆÛ Å©±â ÁöÁ¤
     if (resultLen > 0) {
         if (sign == '-' && res[startIndex] != '0') {
             output[0] = '-';
-            strcpy_s(output + 1, resultLen + 1, res + startIndex); // ÀüÃ¼ ¹öÆÛ Å©±â ÁöÁ¤
+            strcpy_s(output + 1, resultLen + 1, res + startIndex); 
         }
         else {
-            strcpy_s(output, resultLen + 1, res + startIndex); // ÀüÃ¼ ¹öÆÛ Å©±â ÁöÁ¤
+            strcpy_s(output, resultLen + 1, res + startIndex); 
         }
     }
     else {
