@@ -8,32 +8,26 @@ void removeSign(char *str)
     memmove(str, str + 1, strlen(str));
 }
 
-void removeZeros(char *str, int carry)
-{
-    // carry가 0보다 크면 0을 지우지 않는다.
-    if (carry > 0)
-    {
-        return;
-    }
+// void removeZeros(char *str)
+// {
+//     // 문자열 앞에 있는 0을 지운다.
+//     int index = 0;
+//     while (str[index] == '0')
+//     {
+//         index++;
+//     }
 
-    // 문자열 앞에 있는 0을 지운다.
-    int index = 0;
-    while (str[index] == '0')
-    {
-        index++;
-    }
-
-    // index가 0이 아니라면, 앞에 있는 0을 제거
-    if (index > 0)
-    {
-        int i = 0;
-        while (str[index])
-        {
-            str[i++] = str[index++];
-        }
-        str[i] = '\0'; // 문자열 끝에 null 문자 추가
-    }
-}
+//     // index가 0이 아니라면, 앞에 있는 0을 제거
+//     if (index > 0)
+//     {
+//         int i = 0;
+//         while (str[index])
+//         {
+//             str[i++] = str[index++];
+//         }
+//         str[i] = '\0'; // 문자열 끝에 null 문자 추가
+//     }
+// }
 
 // 그니까....
 // 생각해보니
@@ -144,7 +138,7 @@ char *getAdd(char *first, char *second)
     results[length] = sign;
 
     reversedString(results, reversed_results);
-    removeZeros(reversed_results, 0);
+    // removeZeros(reversed_results);
 
     // printf("Input A : %s\n", first);
     // printf("Input B : %s\n", second);
