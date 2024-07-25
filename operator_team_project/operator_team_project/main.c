@@ -263,17 +263,21 @@ int main()
         {
         case 0:
             // add 함수 call
+            printf("첫번째 숫자 : %s\n", firstNumber);
+            printf("두번째 숫자 : %s\n", secondNumber);
             res = getAdd(firstNumber, secondNumber);
-            printf("결과: %s\n", res);
+            printf("res = getAdd 결과: %s\n", res);
+            output = outputBuilder(res);
+            printf(" output 결과: %s\n", output);
             free(res);
             break;
         case 1:
             printf("첫번째 숫자 : %s\n", firstNumber);
             printf("두번째 숫자 : %s\n", secondNumber);
             res = getMinus(firstNumber, secondNumber);
-            printf("결과: %s\n", res);
+            printf(" res = getMinus 결과: %s\n", res);
             output = outputBuilder(res);
-            printf("결과: %s\n", output);
+            printf(" output 결과: %s\n", output);
             free(res);
             break;
         default:
@@ -281,7 +285,10 @@ int main()
             break;
         }
 
-        puts("메뉴로 돌아가기 위해서 Enter를 눌러주세요.");
-        getchar(); // Enter 키 입력 대기
+        puts("메뉴로 돌아가기 위해서 아무키나 눌러주세요.");
+        while (getchar() != '\n') // 입력 버퍼 비우기
+        {
+            continue;
+        }
     }
 }
