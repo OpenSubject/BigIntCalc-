@@ -82,14 +82,14 @@ char *getAdd(char *first, char *second)
         return NULL;
     }
 
-    char *first_copy = strdup(first);
-    char *second_copy = strdup(second);
+    char* first_copy = _strdup(first);
+    char* second_copy = _strdup(second);
 
     // 부호삭제
     removeSign(first_copy);
     removeSign(second_copy);
 
-    int first_length = strlen(first_copy), second_length = strlen(second_copy);
+    int first_length =(int)strlen(first_copy), second_length = (int)strlen(second_copy);
     int length = (first_length > second_length) ? first_length : second_length;
     int carry_in = 0;
 

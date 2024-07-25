@@ -180,12 +180,71 @@ int operatorSelector(char *first, char *second, char *operator)
     return result;
 }
 
+
+char* outputBuilder(char* res) {
+    int len = (int)strlen(res); // 문자열 길이를 int로 변환
+    int startIndex = 0;
+
+    // 부호를 결정
+    char sign = res[0];
+    if (sign == '+' || sign == '-') {
+        startIndex = 1;
+    }
+    else {
+        sign = '+';
+    }
+
+    // 불필요한 0 제거
+    while (startIndex < len && res[startIndex] == '0') {
+        startIndex++;
+    }
+
+    // 모든 숫자가 0인 경우
+    if (startIndex == len) {
+        startIndex--;
+    }
+
+    int resultLen = len - startIndex;
+    char* output = (char*)malloc(resultLen + 2); // 부호와 null 포함
+    if (!output) {
+        perror("메모리 할당 실패");
+        exit(EXIT_FAILURE);
+    }
+
+    // 결과 문자열 생성
+    if (resultLen > 0) {
+        if (sign == '-' && res[startIndex] != '0') {
+            output[0] = '-';
+            strcpy_s(output + 1,strlen(res+startIndex), res + startIndex); 
+        }
+        else {
+            strcpy_s(output,strlen(res+startIndex), res + startIndex); 
+        }
+    }
+    else {
+        strcpy_s(output,1, "0"); // 모든 숫자가 0인 경우
+    }
+
+    // 부호가 '+'인 경우 부호 제거
+    if (output[0] == '+') {
+        memmove(output, output + 1, strlen(output) + 1); // 문자열 복사 시 null terminator 포함
+    }
+
+    // 모든 문자가 0인 경우 '0'으로 처리
+    if (strcmp(output, "") == 0 || strcmp(output, "-0") == 0) {
+        strcpy_s(output,1, "0");
+    }
+
+    return output;
+}
+
 int main()
 {
     char firstNumber[MAX_LENGTH];
     char secondNumber[MAX_LENGTH];
     char operator[2]; // 연산자를 위한 배열
-    char *res;
+    char* res;
+    char* output;
 
     while (1)
     {
@@ -213,6 +272,8 @@ int main()
             printf("두번째 숫자 : %s\n", secondNumber);
             res = getMinus(firstNumber, secondNumber);
             printf("결과: %s\n", res);
+            output = outputBuilder(res);
+            printf("결과: %s\n", output);
             free(res);
             break;
         default:
@@ -223,7 +284,4 @@ int main()
         puts("메뉴로 돌아가기 위해서 Enter를 눌러주세요.");
         getchar(); // Enter 키 입력 대기
     }
-
-    puts("계산기를 종료하겠습니다.");
-    return 0;
 }
