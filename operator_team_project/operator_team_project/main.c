@@ -215,14 +215,14 @@ char* outputBuilder(char* res) {
     if (resultLen > 0) {
         if (sign == '-' && res[startIndex] != '0') {
             output[0] = '-';
-            strcpy_s(output + 1,strlen(res+startIndex), res + startIndex); 
+            strcpy_s(output + 1, resultLen + 1, res + startIndex); // 전체 버퍼 크기 지정
         }
         else {
-            strcpy_s(output,strlen(res+startIndex), res + startIndex); 
+            strcpy_s(output, resultLen + 1, res + startIndex); // 전체 버퍼 크기 지정
         }
     }
     else {
-        strcpy_s(output,1, "0"); // 모든 숫자가 0인 경우
+        strcpy_s(output, 2, "0"); // 모든 숫자가 0인 경우
     }
 
     // 부호가 '+'인 경우 부호 제거
@@ -232,7 +232,7 @@ char* outputBuilder(char* res) {
 
     // 모든 문자가 0인 경우 '0'으로 처리
     if (strcmp(output, "") == 0 || strcmp(output, "-0") == 0) {
-        strcpy_s(output,1, "0");
+        strcpy_s(output, 2, "0");
     }
 
     return output;
